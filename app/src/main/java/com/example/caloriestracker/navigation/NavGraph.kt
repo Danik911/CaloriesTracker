@@ -8,6 +8,8 @@ import androidx.navigation.compose.composable
 import com.example.core.navigation.Route
 import com.example.onboarding_presentation.age_screen.AgeScreen
 import com.example.onboarding_presentation.gender_screen.GenderScreen
+import com.example.onboarding_presentation.height_screen.HeightScreen
+import com.example.onboarding_presentation.height_screen.HeightViewModel
 import com.example.onboarding_presentation.welcome_screen.WelcomeScreen
 
 @Composable
@@ -32,7 +34,10 @@ fun SetupNavigation(
             GenderScreen(onNavigate = navController::navigateToScreen)
         }
         composable(Route.HEIGHT) {
-
+            HeightScreen(
+                scaffoldState = scaffoldState,
+                onNavigate = navController::navigateToScreen
+            )
         }
         composable(Route.NUTRIENT_GOAL) {
 
