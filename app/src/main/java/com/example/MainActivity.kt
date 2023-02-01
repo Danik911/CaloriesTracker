@@ -3,6 +3,7 @@ package com.example
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material.rememberScaffoldState
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.caloriestracker.navigation.SetupNavigation
@@ -18,7 +19,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             CaloriesTrackerTheme {
                 navHostController = rememberNavController()
-                SetupNavigation(navController = navHostController)
+                val scaffoldState = rememberScaffoldState()
+                SetupNavigation(
+                    navController = navHostController,
+                    scaffoldState = scaffoldState
+                )
             }
         }
     }
