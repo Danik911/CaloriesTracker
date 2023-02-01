@@ -3,21 +3,21 @@ package com.example.core.domain.preferences
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.core.domain.model.ActivityLevel
 import com.example.core.domain.model.Gender
 import com.example.core.domain.model.GoalType
 import com.example.core.domain.model.UserInfo
-import com.example.core.domain.preferences.DataStoreOperations.*
-import com.example.core.domain.preferences.DataStoreOperations.Companion.KEY_ACTIVITY_LEVEL
-import com.example.core.domain.preferences.DataStoreOperations.Companion.KEY_AGE
-import com.example.core.domain.preferences.DataStoreOperations.Companion.KEY_CARB_RATIO
-import com.example.core.domain.preferences.DataStoreOperations.Companion.KEY_FAT_RATIO
-import com.example.core.domain.preferences.DataStoreOperations.Companion.KEY_GENDER
-import com.example.core.domain.preferences.DataStoreOperations.Companion.KEY_GOAL_TYPE
-import com.example.core.domain.preferences.DataStoreOperations.Companion.KEY_HEIGHT
-import com.example.core.domain.preferences.DataStoreOperations.Companion.KEY_PROTEIN_RATIO
-import com.example.core.domain.preferences.DataStoreOperations.Companion.KEY_WEIGHT
+import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_ACTIVITY_LEVEL
+import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_AGE
+import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_CARB_RATIO
+import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_FAT_RATIO
+import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_GENDER
+import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_GOAL_TYPE
+import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_HEIGHT
+import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_PROTEIN_RATIO
+import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_WEIGHT
 import com.example.core.util.Constants.CALORIES_TRACKER_PREFERENCES_NAME
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -27,7 +27,8 @@ import java.io.IOException
 
 val Context.dataStorePref: DataStore<Preferences> by preferencesDataStore(name = CALORIES_TRACKER_PREFERENCES_NAME)
 
-class DataStoreOperationsImpl(context: Context) : DataStoreOperations {
+class DataStorePreferencesImpl(context: Context) :
+    DataStorePreferences {
 
     private val dataStore = context.dataStorePref
 
@@ -113,7 +114,8 @@ class DataStoreOperationsImpl(context: Context) : DataStoreOperations {
                 val age = preferences[PreferencesKey.ageKey] ?: -1
                 val weight = preferences[PreferencesKey.weightKey] ?: 0.0f
                 val height = preferences[PreferencesKey.heightKey] ?: -1
-                val activityLevel = preferences[PreferencesKey.activityLevelKey] ?: ActivityLevel.MEDIUM
+                val activityLevel =
+                    preferences[PreferencesKey.activityLevelKey] ?: ActivityLevel.MEDIUM
                 val goalType = preferences[PreferencesKey.goalTypeKey] ?: GoalType.KEEP_WEIGHT
                 val carbRatio = preferences[PreferencesKey.carbRatioKey] ?: 0.0f
                 val proteinRatio = preferences[PreferencesKey.proteinRationKey] ?: 0.0f

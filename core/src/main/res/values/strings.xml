@@ -4,4 +4,7 @@
     <string name="error_unknown">Unknown error</string>
     <string name="welcome_text">Hello! Let\'s find out more about you :)</string>
     <string name="next">Next</string>
+    <string name="what_is_your_gender">What is your gender?</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 </resources>

@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.core.navigation.Route
+import com.example.onboarding_presentation.gender_screen.GenderScreen
 import com.example.onboarding_presentation.welcome_screen.WelcomeScreen
 
 @Composable
@@ -20,7 +21,7 @@ fun SetupNavigation(navController: NavHostController) {
 
         }
         composable(Route.GENDER){
-
+            GenderScreen(onNavigate = navController::navigateToScreen)
         }
         composable(Route.HEIGHT){
 

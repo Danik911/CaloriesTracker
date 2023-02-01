@@ -1,4 +1,4 @@
-package com.example.caloriestracker
+package com.example
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,7 +7,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.caloriestracker.navigation.SetupNavigation
 import com.example.caloriestracker.ui.theme.CaloriesTrackerTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private lateinit var navHostController: NavHostController

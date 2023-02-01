@@ -6,7 +6,7 @@ import com.example.core.domain.model.GoalType
 import com.example.core.domain.model.UserInfo
 import kotlinx.coroutines.flow.Flow
 
-interface DataStoreOperations {
+interface DataStorePreferences {
 
     suspend fun saveGender(gender: Gender)
     suspend fun saveAge(age: Int)
