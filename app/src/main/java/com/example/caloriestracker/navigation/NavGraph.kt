@@ -10,6 +10,7 @@ import com.example.onboarding_presentation.age_screen.AgeScreen
 import com.example.onboarding_presentation.gender_screen.GenderScreen
 import com.example.onboarding_presentation.height_screen.HeightScreen
 import com.example.onboarding_presentation.height_screen.HeightViewModel
+import com.example.onboarding_presentation.weight_screen.WeightScreen
 import com.example.onboarding_presentation.welcome_screen.WelcomeScreen
 
 @Composable
@@ -32,6 +33,12 @@ fun SetupNavigation(
         }
         composable(Route.GENDER) {
             GenderScreen(onNavigate = navController::navigateToScreen)
+        }
+        composable(Route.WEIGHT) {
+            WeightScreen(
+                scaffoldState = scaffoldState,
+                onNavigate = navController::navigateToScreen
+            )
         }
         composable(Route.HEIGHT) {
             HeightScreen(
