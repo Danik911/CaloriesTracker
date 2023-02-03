@@ -6,8 +6,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.core.navigation.Route
+import com.example.onboarding_presentation.activity_screen.ActivityScreen
 import com.example.onboarding_presentation.age_screen.AgeScreen
 import com.example.onboarding_presentation.gender_screen.GenderScreen
+import com.example.onboarding_presentation.goal_screen.GoalScreen
 import com.example.onboarding_presentation.height_screen.HeightScreen
 import com.example.onboarding_presentation.height_screen.HeightViewModel
 import com.example.onboarding_presentation.weight_screen.WeightScreen
@@ -50,10 +52,15 @@ fun SetupNavigation(
 
         }
         composable(Route.ACTIVITY) {
+            ActivityScreen(
+                onNavigate = navController::navigateToScreen
+            )
 
         }
         composable(Route.GOAL) {
-
+            GoalScreen(
+                onNavigate = navController::navigateToScreen
+            )
         }
         composable(Route.TRACKER_OVERVIEW) {
 

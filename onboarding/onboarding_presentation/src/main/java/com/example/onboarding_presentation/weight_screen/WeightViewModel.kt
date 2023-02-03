@@ -38,7 +38,7 @@ class WeightViewModel @Inject constructor(
 
     fun onNextClick() {
         viewModelScope.launch {
-            val height = weight.toIntOrNull() ?: kotlin.run {
+            val weight = weight.toFloatOrNull() ?: kotlin.run {
                 _uiEvent.send(
                     UiEvent.ShowSnackbar(
                         UiText.StringResource(R.string.error_weight_cant_be_empty)
@@ -46,7 +46,7 @@ class WeightViewModel @Inject constructor(
                 )
                 return@launch
             }
-            dataStorePreferences.saveHeight(height)
+            dataStorePreferences.saveWeight(weight)
             _uiEvent.send(UiEvent.Navigate(Route.ACTIVITY))
         }
     }
