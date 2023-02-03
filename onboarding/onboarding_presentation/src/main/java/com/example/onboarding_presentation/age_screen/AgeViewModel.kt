@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.R.string.*
 import com.example.core.domain.preferences.DataStorePreferences
-import com.example.core.domain.use_cases.FilterOutDigits
+import com.example.core.domain.use_cases.FilterOutDigitsUseCase
 import com.example.core.navigation.Route
 import com.example.core.util.UiEvent
 import com.example.core.util.UiText
@@ -20,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AgeViewModel @Inject constructor(
     private val dataStorePreferences: DataStorePreferences,
-    private val filterOutDigits: FilterOutDigits
+    private val filterOutDigitsUseCase: FilterOutDigitsUseCase
 ) : ViewModel() {
 
 
@@ -32,7 +32,7 @@ class AgeViewModel @Inject constructor(
 
     fun onAgeEnter(age: String) {
         if (age.length <= 2) {
-            this.age = filterOutDigits(age)
+            this.age = filterOutDigitsUseCase(age)
         }
     }
 

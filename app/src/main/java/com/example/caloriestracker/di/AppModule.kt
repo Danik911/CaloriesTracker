@@ -3,7 +3,7 @@ package com.example.caloriestracker.di
 import android.content.Context
 import com.example.core.domain.preferences.DataStorePreferences
 import com.example.core.domain.preferences.DataStorePreferencesImpl
-import com.example.core.domain.use_cases.FilterOutDigits
+import com.example.core.domain.use_cases.FilterOutDigitsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +25,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideFilterOutDigitsUseCase(): FilterOutDigits{
-        return FilterOutDigits()
+    fun provideFilterOutDigitsUseCase(): FilterOutDigitsUseCase{
+        return FilterOutDigitsUseCase()
     }
 }
