@@ -1,5 +1,6 @@
 package com.example.onboarding_presentation.age_screen
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -15,6 +16,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -38,6 +40,7 @@ class AgeViewModel @Inject constructor(
 
     fun onNextClick() {
         viewModelScope.launch {
+
             val ageNumber = age.toIntOrNull() ?: kotlin.run {
                 _uiEvent.send(
                     UiEvent.ShowSnackbar(
@@ -46,10 +49,9 @@ class AgeViewModel @Inject constructor(
                 )
                 return@launch
             }
-            dataStorePreferences.saveAge(age = ageNumber)
+            Timber.d("$ageNumber")
+           dataStorePreferences.saveAge(age = ageNumber)
             _uiEvent.send(UiEvent.Navigate(Route.HEIGHT))
         }
-
     }
-
 }

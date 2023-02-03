@@ -27,4 +27,7 @@ object Testing {
 
     private const val testRunnerVersion = "1.4.0"
     const val testRunner = "androidx.test:runner:$testRunnerVersion"
+
+    private const val timberVersion = "5.0.1"
+    const val timber = "com.jakewharton.timber:timber:$timberVersion"
 }

@@ -12,6 +12,7 @@ import com.example.onboarding_presentation.gender_screen.GenderScreen
 import com.example.onboarding_presentation.goal_screen.GoalScreen
 import com.example.onboarding_presentation.height_screen.HeightScreen
 import com.example.onboarding_presentation.height_screen.HeightViewModel
+import com.example.onboarding_presentation.nutrient_goal_screen.NutrientGoalScreen
 import com.example.onboarding_presentation.weight_screen.WeightScreen
 import com.example.onboarding_presentation.welcome_screen.WelcomeScreen
 
@@ -49,6 +50,10 @@ fun SetupNavigation(
             )
         }
         composable(Route.NUTRIENT_GOAL) {
+            NutrientGoalScreen(
+                scaffoldState = scaffoldState,
+                onNavigate = navController::navigateToScreen
+            )
 
         }
         composable(Route.ACTIVITY) {
