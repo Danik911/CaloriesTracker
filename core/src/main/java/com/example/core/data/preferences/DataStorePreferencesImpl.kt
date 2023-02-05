@@ -1,4 +1,4 @@
-package com.example.core.domain.preferences
+package com.example.core.data.preferences
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -9,6 +9,7 @@ import com.example.core.domain.model.ActivityLevel
 import com.example.core.domain.model.Gender
 import com.example.core.domain.model.GoalType
 import com.example.core.domain.model.UserInfo
+import com.example.core.domain.preferences.DataStorePreferences
 import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_ACTIVITY_LEVEL
 import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_AGE
 import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_CARB_RATIO
@@ -17,6 +18,7 @@ import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_GE
 import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_GOAL_TYPE
 import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_HEIGHT
 import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_PROTEIN_RATIO
+import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_SHOULD_SHOW_ONBOARDING
 import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_WEIGHT
 import com.example.core.util.Constants.CALORIES_TRACKER_PREFERENCES_NAME
 import kotlinx.coroutines.flow.Flow
@@ -42,6 +44,7 @@ class DataStorePreferencesImpl(context: Context) :
         val carbRatioKey = floatPreferencesKey(name = KEY_CARB_RATIO)
         val proteinRationKey = floatPreferencesKey(name = KEY_PROTEIN_RATIO)
         val fatRatioKey = floatPreferencesKey(name = KEY_FAT_RATIO)
+        val showOnboarding = booleanPreferencesKey(name = KEY_SHOULD_SHOW_ONBOARDING)
 
     }
 
@@ -131,6 +134,27 @@ class DataStorePreferencesImpl(context: Context) :
                     proteinRatio = proteinRatio,
                     fatRatio = fatRatio
                 )
+            }
+    }
+
+    override suspend fun saveShouldShowOnboarding(showOnboarding: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKey.showOnboarding] = showOnboarding
+        }
+    }
+
+    override fun loadShouldShowOnboarding(): Flow<Boolean> {
+        return dataStore.data
+            .catch { exception ->
+                if (exception is IOException) {
+                    emit(emptyPreferences())
+                } else {
+                    throw exception
+                }
+            }
+            .map { preferences ->
+                val showOnboarding = preferences[PreferencesKey.showOnboarding] ?: false
+                showOnboarding
             }
     }
 

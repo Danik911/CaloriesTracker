@@ -21,6 +21,9 @@ interface DataStorePreferences {
 
     fun loadUserInfo(): Flow<UserInfo>
 
+    suspend fun saveShouldShowOnboarding(showOnboarding: Boolean)
+    fun loadShouldShowOnboarding(): Flow<Boolean>
+
     companion object {
         const val KEY_GENDER = "gender"
         const val KEY_AGE = "age"
@@ -31,6 +34,7 @@ interface DataStorePreferences {
         const val KEY_CARB_RATIO = "carb_ratio"
         const val KEY_PROTEIN_RATIO = "protein_ratio"
         const val KEY_FAT_RATIO = "fat_ratio"
+        const val KEY_SHOULD_SHOW_ONBOARDING = "should_show_onboarding"
     }
 
 }
