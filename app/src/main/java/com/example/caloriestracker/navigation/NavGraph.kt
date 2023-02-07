@@ -15,23 +15,21 @@ import com.example.onboarding_presentation.height_screen.HeightViewModel
 import com.example.onboarding_presentation.nutrient_goal_screen.NutrientGoalScreen
 import com.example.onboarding_presentation.weight_screen.WeightScreen
 import com.example.onboarding_presentation.welcome_screen.WelcomeScreen
+import com.example.tracker_presentation.tracker_overview_screen.TrackerOverviewScreen
 
 @Composable
 fun SetupNavigation(
-    navController: NavHostController,
-    scaffoldState: ScaffoldState
+    navController: NavHostController, scaffoldState: ScaffoldState
 ) {
     NavHost(
-        navController = navController,
-        startDestination = Route.WELCOME
+        navController = navController, startDestination = Route.WELCOME
     ) {
         composable(Route.WELCOME) {
             WelcomeScreen(onNavigate = navController::navigateToScreen)
         }
         composable(Route.AGE) {
             AgeScreen(
-                scaffoldState = scaffoldState,
-                onNavigate = navController::navigateToScreen
+                scaffoldState = scaffoldState, onNavigate = navController::navigateToScreen
             )
         }
         composable(Route.GENDER) {
@@ -39,20 +37,17 @@ fun SetupNavigation(
         }
         composable(Route.WEIGHT) {
             WeightScreen(
-                scaffoldState = scaffoldState,
-                onNavigate = navController::navigateToScreen
+                scaffoldState = scaffoldState, onNavigate = navController::navigateToScreen
             )
         }
         composable(Route.HEIGHT) {
             HeightScreen(
-                scaffoldState = scaffoldState,
-                onNavigate = navController::navigateToScreen
+                scaffoldState = scaffoldState, onNavigate = navController::navigateToScreen
             )
         }
         composable(Route.NUTRIENT_GOAL) {
             NutrientGoalScreen(
-                scaffoldState = scaffoldState,
-                onNavigate = navController::navigateToScreen
+                scaffoldState = scaffoldState, onNavigate = navController::navigateToScreen
             )
 
         }
@@ -68,7 +63,9 @@ fun SetupNavigation(
             )
         }
         composable(Route.TRACKER_OVERVIEW) {
-
+            TrackerOverviewScreen(
+                onNavigate = navController::navigateToScreen
+            )
         }
         composable(Route.SEARCH) {
 

@@ -59,6 +59,7 @@ dependencies {
     implementation(Compose.activityCompose)
 
     implementation(DaggerHilt.hiltAndroid)
+    implementation("androidx.core:core-ktx:+")
     kapt(DaggerHilt.hiltCompiler)
 
     implementation(project(Modules.core))

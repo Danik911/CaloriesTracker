@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.preferences.DataStorePreferences
 import com.example.core.domain.use_cases.FilterOutDigitsUseCase
+import com.example.core.navigation.Route
 import com.example.core.util.UiEvent
 import com.example.onboarding_domain.use_cases.ValidateNutrientsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,10 +42,8 @@ class NutrientGoalViewModel @Inject constructor(
                 state = state.copy(fatRatio = filterOutDigitsUseCase(event.fatRatio))
             }
             is NutrientGoalEvent.OnNextClick -> validateResult()
-
         }
     }
-
     private fun validateResult() {
         val result = validateNutrientsUseCase(
             carbsRatioText = state.carbsRatio,
@@ -54,6 +53,7 @@ class NutrientGoalViewModel @Inject constructor(
         when (result) {
             is ValidateNutrientsUseCase.Result.Success -> {
                 viewModelScope.launch {
+                    _uiEvent.send(UiEvent.Navigate(Route.TRACKER_OVERVIEW))
                     dataStorePreferences.saveCarbRatio(result.carbsRatio)
                     dataStorePreferences.saveProteinRatio(result.proteinRatio)
                     dataStorePreferences.saveFatRatio(result.fatRatio)
@@ -64,6 +64,8 @@ class NutrientGoalViewModel @Inject constructor(
                     _uiEvent.send(UiEvent.ShowSnackbar(result.message))
                 }
             }
+
         }
     }
 }
+

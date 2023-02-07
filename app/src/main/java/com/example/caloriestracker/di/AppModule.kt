@@ -1,8 +1,8 @@
 package com.example.caloriestracker.di
 
 import android.content.Context
+import com.example.core.data.preferences.DataStorePreferencesImpl
 import com.example.core.domain.preferences.DataStorePreferences
-import com.example.core.domain.preferences.DataStorePreferencesImpl
 import com.example.core.domain.use_cases.FilterOutDigitsUseCase
 import dagger.Module
 import dagger.Provides
