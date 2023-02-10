@@ -22,10 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
-import com.example.core.R.*
+import com.example.core.R.drawable
+import com.example.core.R.string
 import com.example.core_ui.LocalSpacing
 import com.example.tracker_domain.model.TrackedFood
-import com.example.tracker_presentation.R
 import com.example.tracker_presentation.components.NutrientInfo
 
 @ExperimentalCoilApi
