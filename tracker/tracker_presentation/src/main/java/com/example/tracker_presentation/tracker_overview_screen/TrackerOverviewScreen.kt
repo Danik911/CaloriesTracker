@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -14,6 +15,7 @@ import com.example.core.R
 import com.example.core.util.UiEvent
 import com.example.core_ui.LocalSpacing
 import com.example.tracker_presentation.tracker_overview_screen.components.*
+import kotlinx.coroutines.flow.collect
 
 
 @OptIn(ExperimentalCoilApi::class)
@@ -25,6 +27,16 @@ fun TrackerOverviewScreen(
     val spacing = LocalSpacing.current
     val state = viewModel.state
     val context = LocalContext.current
+
+    LaunchedEffect(key1 = true ){
+        viewModel.uiEvent.collect{uiEvent->
+            when(uiEvent){
+                is UiEvent.Navigate -> onNavigate(uiEvent)
+                else -> Unit
+            }
+        }
+    }
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
