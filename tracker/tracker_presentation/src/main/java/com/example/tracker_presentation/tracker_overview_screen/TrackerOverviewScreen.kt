@@ -1,6 +1,5 @@
 package com.example.tracker_presentation.tracker_overview_screen
 
-import android.widget.Space
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -15,7 +14,6 @@ import com.example.core.R
 import com.example.core.util.UiEvent
 import com.example.core_ui.LocalSpacing
 import com.example.tracker_presentation.tracker_overview_screen.components.*
-import kotlinx.coroutines.flow.collect
 
 
 @OptIn(ExperimentalCoilApi::class)
@@ -28,9 +26,12 @@ fun TrackerOverviewScreen(
     val state = viewModel.state
     val context = LocalContext.current
 
-    LaunchedEffect(key1 = true ){
-        viewModel.uiEvent.collect{uiEvent->
-            when(uiEvent){
+
+
+
+    LaunchedEffect(key1 = context) {
+        viewModel.uiEvent.collect { uiEvent ->
+            when (uiEvent) {
                 is UiEvent.Navigate -> onNavigate(uiEvent)
                 else -> Unit
             }

@@ -4,7 +4,7 @@ import com.example.core.domain.model.ActivityLevel
 import com.example.core.domain.model.Gender
 import com.example.core.domain.model.GoalType
 import com.example.core.domain.model.UserInfo
-import com.example.core.domain.preferences.DataStorePreferences
+import com.example.core.domain.preferences.Preferences
 import com.example.tracker_domain.model.MealType
 import com.example.tracker_domain.model.TrackedFood
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlin.math.roundToInt
 
-class CalculateMealNutrientsUseCase(private val dataStorePreferences: DataStorePreferences) {
+class CalculateMealNutrientsUseCase(private val preferences: Preferences) {
 
     operator fun invoke(trackedFoods: List<TrackedFood>): Flow<Result> = flow {
 
@@ -34,32 +34,33 @@ class CalculateMealNutrientsUseCase(private val dataStorePreferences: DataStoreP
         val totalFat = allNutrients.values.sumOf { it.fat }
         val totalCalories = allNutrients.values.sumOf { it.calories }
 
+        val userInfo = preferences.loadUserInfo()
+        /*val caloryGoal = dailyCaloryRequirement(userInfo)
+        val carbsGoal = (caloryGoal * userInfo.carbRatio / 4f).roundToInt()
+        val proteinGoal = (caloryGoal * userInfo.proteinRatio / 4f).roundToInt()
+        val fatGoal = (caloryGoal * userInfo.fatRatio / 9f).roundToInt()*/
 
-        dataStorePreferences.loadUserInfo().map { userInfo ->
+        userInfo.map { userInfoFlow->
+            val caloryGoal = dailyCaloryRequirement(userInfoFlow)
+            val carbsGoal = (caloryGoal * userInfoFlow.carbRatio / 4f).roundToInt()
+            val proteinGoal = (caloryGoal * userInfoFlow.proteinRatio / 4f).roundToInt()
+            val fatGoal = (caloryGoal * userInfoFlow.fatRatio / 9f).roundToInt()
 
-            val caloryGoal = dailyCaloryRequirement(userInfo = userInfo)
-            val carbsGoal = (caloryGoal * userInfo.carbRatio / 4f).roundToInt()
-            val proteinGoal = (caloryGoal * userInfo.proteinRatio / 4f).roundToInt()
-            val fatGoal = (caloryGoal * userInfo.fatRatio / 9f).roundToInt()
-
-            emit(
-                Result(
-                    carbsGoal = carbsGoal,
-                    proteinGoal = proteinGoal,
-                    fatGoal = fatGoal,
-                    caloriesGoal = dailyCaloryRequirement(userInfo),
-                    totalCarbs = totalCarbs,
-                    totalProtein = totalProtein,
-                    totalFat = totalFat,
-                    totalCalories = totalCalories,
-                    mealNutrients = allNutrients
-
-                )
+             val result = Result(
+                carbsGoal = carbsGoal,
+                proteinGoal = proteinGoal,
+                fatGoal = fatGoal,
+                caloriesGoal = caloryGoal,
+                totalCarbs = totalCarbs,
+                totalProtein = totalProtein,
+                totalFat = totalFat,
+                totalCalories = totalCalories,
+                mealNutrients = allNutrients
             )
+            emit(result)
         }
+
     }
-
-
 
 
     private fun bmr(userInfo: UserInfo): Int {

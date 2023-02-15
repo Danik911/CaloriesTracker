@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.R
-import com.example.core.domain.preferences.DataStorePreferences
+import com.example.core.domain.preferences.Preferences
 import com.example.core.domain.use_cases.FilterOutDigitsUseCase
 import com.example.core.navigation.Route
 import com.example.core.util.UiEvent
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HeightViewModel @Inject constructor(
-    private val dataStorePreferences: DataStorePreferences,
+    private val preferences: Preferences,
     private val filterOutDigitsUseCase: FilterOutDigitsUseCase
 ) : ViewModel() {
 
@@ -46,7 +46,7 @@ class HeightViewModel @Inject constructor(
                 )
                 return@launch
             }
-            dataStorePreferences.saveHeight(height)
+            preferences.saveHeight(height)
             _uiEvent.send(UiEvent.Navigate(Route.WEIGHT))
         }
     }

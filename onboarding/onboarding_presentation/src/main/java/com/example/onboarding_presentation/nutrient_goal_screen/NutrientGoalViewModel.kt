@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.core.domain.preferences.DataStorePreferences
+import com.example.core.domain.preferences.Preferences
 import com.example.core.domain.use_cases.FilterOutDigitsUseCase
 import com.example.core.navigation.Route
 import com.example.core.util.UiEvent
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NutrientGoalViewModel @Inject constructor(
-    private val dataStorePreferences: DataStorePreferences,
+    private val preferences: Preferences,
     private val filterOutDigitsUseCase: FilterOutDigitsUseCase,
     private val validateNutrientsUseCase: ValidateNutrientsUseCase
 ) : ViewModel() {
@@ -54,9 +54,9 @@ class NutrientGoalViewModel @Inject constructor(
             is ValidateNutrientsUseCase.Result.Success -> {
                 viewModelScope.launch {
                     _uiEvent.send(UiEvent.Navigate(Route.TRACKER_OVERVIEW))
-                    dataStorePreferences.saveCarbRatio(result.carbsRatio)
-                    dataStorePreferences.saveProteinRatio(result.proteinRatio)
-                    dataStorePreferences.saveFatRatio(result.fatRatio)
+                    preferences.saveCarbRatio(result.carbsRatio)
+                    preferences.saveProteinRatio(result.proteinRatio)
+                    preferences.saveFatRatio(result.fatRatio)
                 }
             }
             is ValidateNutrientsUseCase.Result.Error -> {

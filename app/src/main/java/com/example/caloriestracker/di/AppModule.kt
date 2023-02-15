@@ -1,8 +1,8 @@
 package com.example.caloriestracker.di
 
 import android.content.Context
-import com.example.core.data.preferences.DataStorePreferencesImpl
-import com.example.core.domain.preferences.DataStorePreferences
+import com.example.core.data.preferences.PreferencesImpl
+import com.example.core.domain.preferences.Preferences
 import com.example.core.domain.use_cases.FilterOutDigitsUseCase
 import dagger.Module
 import dagger.Provides
@@ -19,8 +19,8 @@ object AppModule {
     @Singleton
     fun provideDataStorePreferences(
         @ApplicationContext context: Context
-    ): DataStorePreferences {
-        return DataStorePreferencesImpl(context = context)
+    ): Preferences {
+        return PreferencesImpl(context = context)
     }
 
     @Provides

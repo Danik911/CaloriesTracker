@@ -1,6 +1,6 @@
 package com.example.tracker_domain.di
 
-import com.example.core.domain.preferences.DataStorePreferences
+import com.example.core.domain.preferences.Preferences
 import com.example.tracker_domain.repository.TrackerRepository
 import com.example.tracker_domain.use_cases.*
 import dagger.Module
@@ -17,14 +17,14 @@ object TrackerDomainModel {
     @Provides
     fun provideTrackedUseCases(
         repository: TrackerRepository,
-        dataStorePreferences: DataStorePreferences
+        preferences: Preferences
     ): TrackerUseCases {
         return TrackerUseCases(
             trackFoodUseCase = TrackFoodUseCase(repository),
             searchFoodUseCase = SearchFoodUseCase(repository),
             getFoodsForDateUseCase = GetFoodsForDateUseCase(repository),
             deleteTrackedFoodUseCase = DeleteTrackedFoodUseCase(repository),
-            calculateMealNutrientsUseCase = CalculateMealNutrientsUseCase(dataStorePreferences)
+            calculateMealNutrientsUseCase = CalculateMealNutrientsUseCase(preferences)
         )
     }
 }

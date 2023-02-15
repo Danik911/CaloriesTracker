@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.model.GoalType
-import com.example.core.domain.preferences.DataStorePreferences
+import com.example.core.domain.preferences.Preferences
 import com.example.core.navigation.Route
 import com.example.core.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GoalViewModel @Inject constructor(
-    private val dataStorePreferences: DataStorePreferences
+    private val preferences: Preferences
 ) : ViewModel() {
 
     var selectedGoal by mutableStateOf(
@@ -34,7 +34,7 @@ class GoalViewModel @Inject constructor(
 
     fun onNextClick() {
         viewModelScope.launch {
-            dataStorePreferences.saveGoalType(selectedGoal)
+            preferences.saveGoalType(selectedGoal)
             _uiEvent.send(UiEvent.Navigate(Route.NUTRIENT_GOAL))
         }
     }

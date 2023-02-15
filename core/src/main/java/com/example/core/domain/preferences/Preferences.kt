@@ -6,7 +6,7 @@ import com.example.core.domain.model.GoalType
 import com.example.core.domain.model.UserInfo
 import kotlinx.coroutines.flow.Flow
 
-interface DataStorePreferences {
+interface Preferences {
 
     suspend fun saveGender(gender: Gender)
     suspend fun saveAge(age: Int)
@@ -19,10 +19,10 @@ interface DataStorePreferences {
     suspend fun saveFatRatio(fatRatio: Float)
 
 
-    fun loadUserInfo(): Flow<UserInfo>
+    fun loadUserInfo(): UserInfo
 
     suspend fun saveShouldShowOnboarding(showOnboarding: Boolean)
-    fun loadShouldShowOnboarding(): Flow<Boolean>
+    fun loadShouldShowOnboarding(): Boolean
 
     companion object {
         const val KEY_GENDER = "gender"

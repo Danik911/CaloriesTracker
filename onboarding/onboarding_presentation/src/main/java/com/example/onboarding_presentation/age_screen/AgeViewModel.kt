@@ -1,13 +1,12 @@
 package com.example.onboarding_presentation.age_screen
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.R.string.*
-import com.example.core.domain.preferences.DataStorePreferences
+import com.example.core.domain.preferences.Preferences
 import com.example.core.domain.use_cases.FilterOutDigitsUseCase
 import com.example.core.navigation.Route
 import com.example.core.util.UiEvent
@@ -21,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AgeViewModel @Inject constructor(
-    private val dataStorePreferences: DataStorePreferences,
+    private val preferences: Preferences,
     private val filterOutDigitsUseCase: FilterOutDigitsUseCase
 ) : ViewModel() {
 
@@ -50,7 +49,7 @@ class AgeViewModel @Inject constructor(
                 return@launch
             }
             Timber.d("$ageNumber")
-           dataStorePreferences.saveAge(age = ageNumber)
+           preferences.saveAge(age = ageNumber)
             _uiEvent.send(UiEvent.Navigate(Route.HEIGHT))
         }
     }

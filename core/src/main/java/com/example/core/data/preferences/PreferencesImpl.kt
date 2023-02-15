@@ -9,17 +9,16 @@ import com.example.core.domain.model.ActivityLevel
 import com.example.core.domain.model.Gender
 import com.example.core.domain.model.GoalType
 import com.example.core.domain.model.UserInfo
-import com.example.core.domain.preferences.DataStorePreferences
-import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_ACTIVITY_LEVEL
-import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_AGE
-import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_CARB_RATIO
-import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_FAT_RATIO
-import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_GENDER
-import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_GOAL_TYPE
-import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_HEIGHT
-import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_PROTEIN_RATIO
-import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_SHOULD_SHOW_ONBOARDING
-import com.example.core.domain.preferences.DataStorePreferences.Companion.KEY_WEIGHT
+import com.example.core.domain.preferences.Preferences.Companion.KEY_ACTIVITY_LEVEL
+import com.example.core.domain.preferences.Preferences.Companion.KEY_AGE
+import com.example.core.domain.preferences.Preferences.Companion.KEY_CARB_RATIO
+import com.example.core.domain.preferences.Preferences.Companion.KEY_FAT_RATIO
+import com.example.core.domain.preferences.Preferences.Companion.KEY_GENDER
+import com.example.core.domain.preferences.Preferences.Companion.KEY_GOAL_TYPE
+import com.example.core.domain.preferences.Preferences.Companion.KEY_HEIGHT
+import com.example.core.domain.preferences.Preferences.Companion.KEY_PROTEIN_RATIO
+import com.example.core.domain.preferences.Preferences.Companion.KEY_SHOULD_SHOW_ONBOARDING
+import com.example.core.domain.preferences.Preferences.Companion.KEY_WEIGHT
 import com.example.core.util.Constants.CALORIES_TRACKER_PREFERENCES_NAME
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -29,8 +28,8 @@ import java.io.IOException
 
 val Context.dataStorePref: DataStore<Preferences> by preferencesDataStore(name = CALORIES_TRACKER_PREFERENCES_NAME)
 
-class DataStorePreferencesImpl(context: Context) :
-    DataStorePreferences {
+class PreferencesImpl(context: Context) :
+    com.example.core.domain.preferences.Preferences {
 
     private val dataStore = context.dataStorePref
 

@@ -6,20 +6,18 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.model.ActivityLevel
-import com.example.core.domain.preferences.DataStorePreferences
 import com.example.core.navigation.Route
 import com.example.core.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import java.util.prefs.Preferences
 import javax.inject.Inject
 
 
 @HiltViewModel
 class ActivityViewModel @Inject constructor(
-    private val dataStorePreferences: DataStorePreferences
+    private val preferences: com.example.core.domain.preferences.Preferences
 ): ViewModel() {
 
     var selectedActivityLevel by mutableStateOf<ActivityLevel>(
@@ -36,7 +34,7 @@ class ActivityViewModel @Inject constructor(
 
     fun onNextClick() {
         viewModelScope.launch {
-            dataStorePreferences.saveActivityLevel(selectedActivityLevel)
+            preferences.saveActivityLevel(selectedActivityLevel)
             _uiEvent.send(UiEvent.Navigate(Route.GOAL))
         }
     }

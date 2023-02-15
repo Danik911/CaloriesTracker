@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,6 +22,7 @@ import com.example.core_ui.ProteinColor
 import com.example.tracker_presentation.R
 import com.example.tracker_presentation.components.UnitDisplay
 import com.example.tracker_presentation.tracker_overview_screen.TrackerOverviewState
+import timber.log.Timber
 
 @Composable
 fun NutrientsHeader(
@@ -31,6 +33,7 @@ fun NutrientsHeader(
     val animatedCalorieCount = animateIntAsState(
         targetValue = state.totalCalories
     )
+
     Column(
         modifier = modifier
             .fillMaxWidth()

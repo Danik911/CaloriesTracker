@@ -18,6 +18,7 @@ import com.example.onboarding_presentation.height_screen.HeightViewModel
 import com.example.onboarding_presentation.nutrient_goal_screen.NutrientGoalScreen
 import com.example.onboarding_presentation.weight_screen.WeightScreen
 import com.example.onboarding_presentation.welcome_screen.WelcomeScreen
+import com.example.tracker_domain.model.toMealType
 import com.example.tracker_presentation.search_screen.SearchScreen
 import com.example.tracker_presentation.tracker_overview_screen.TrackerOverviewScreen
 
@@ -96,7 +97,7 @@ fun SetupNavigation(
 
             SearchScreen(
                 scaffoldState = scaffoldState,
-                mealName = mealName,
+                mealName = mealName.toMealType(),
                 dayOfMonth = dayOfMonth,
                 month = month,
                 year = year,

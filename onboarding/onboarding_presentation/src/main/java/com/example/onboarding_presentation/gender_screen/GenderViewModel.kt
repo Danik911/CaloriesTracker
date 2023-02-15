@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.model.Gender
-import com.example.core.domain.preferences.DataStorePreferences
+import com.example.core.domain.preferences.Preferences
 import com.example.core.navigation.Route
 import com.example.core.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GenderViewModel @Inject constructor(
-    private val dataStorePreferences: DataStorePreferences
+    private val preferences: Preferences
 ) : ViewModel() {
 
 
@@ -33,7 +33,7 @@ class GenderViewModel @Inject constructor(
 
     fun onNextClick() {
         viewModelScope.launch {
-            dataStorePreferences.saveGender(gender = selectedGender)
+            preferences.saveGender(gender = selectedGender)
             _uiEvent.send(UiEvent.Navigate(Route.AGE))
         }
     }
